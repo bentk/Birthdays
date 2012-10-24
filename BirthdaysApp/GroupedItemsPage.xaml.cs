@@ -2,17 +2,8 @@
 
 using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
 
 // The Grouped Items Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234231
 
@@ -42,6 +33,8 @@ namespace BirthdaysApp
             // TODO: Create an appropriate data model for your problem domain to replace the sample data
             var sampleDataGroups = SampleDataSource.GetGroups((String)navigationParameter);
             this.DefaultViewModel["Groups"] = sampleDataGroups;
+            this.DefaultViewModel["ZoomedOut"] = SampleDataSource.GetTopItems();
+
         }
 
         /// <summary>
@@ -70,14 +63,28 @@ namespace BirthdaysApp
             // Navigate to the appropriate destination page, configuring the new page
             // by passing required information as a navigation parameter
             var itemId = ((SampleDataItem)e.ClickedItem).UniqueId;
-            if(itemId == "AddItem")
-                Frame.Navigate(typeof(AddPage), itemId);
-            else
+            //if(itemId == "AddItem")
+              //  Frame.Navigate(typeof(AddPage), itemId);
+            //else
                 Frame.Navigate(typeof(ItemDetailPage), itemId);
         }
 
-        private void GridViewZoomedOut_ItemClick_1(object sender, ItemClickEventArgs e)
+        private void ZoomedOutItemTapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
         {
+            var s = sender as FrameworkElement;
+            if (s != null)
+            {
+                var zoomedOutItem = s.DataContext as SampleDataGroup;
+                if (zoomedOutItem != null)
+                {
+                    Frame.Navigate(typeof (GroupDetailPage), zoomedOutItem.UniqueId);
+                }
+            }
+        }
+
+        private void AddPersonClick(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof (AddPage), "New");
 
         }
     }

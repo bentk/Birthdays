@@ -452,12 +452,13 @@
         <Setter Property="AutomationProperties.AutomationId" Value="RemoveAppBarButton"/>
         <Setter Property="AutomationProperties.Name" Value="Remove"/>
         <Setter Property="Content" Value="&#xE108;"/>
-    </Style>
+    </Style>-->
     <Style x:Key="AddAppBarButtonStyle" TargetType="ButtonBase" BasedOn="{StaticResource AppBarButtonStyle}">
         <Setter Property="AutomationProperties.AutomationId" Value="AddAppBarButton"/>
         <Setter Property="AutomationProperties.Name" Value="Add"/>
         <Setter Property="Content" Value="&#xE109;"/>
     </Style>
+    <!--
     <Style x:Key="NoAppBarButtonStyle" TargetType="ButtonBase" BasedOn="{StaticResource AppBarButtonStyle}">
         <Setter Property="AutomationProperties.AutomationId" Value="NoAppBarButton"/>
         <Setter Property="AutomationProperties.Name" Value="No"/>
@@ -1644,17 +1645,6 @@
     <!-- Grid-appropriate 250 pixel square item template as seen in the GroupedItemsPage and ItemsPage -->
     <DataTemplate x:Key="Standard250x250ItemTemplate">
         <Grid HorizontalAlignment="Left" Width="250" Height="250">
-            <Border Background="{StaticResource ListViewItemPlaceholderBackgroundThemeBrush}">
-                <Image Source="{Binding Image}" Stretch="UniformToFill" AutomationProperties.Name="{Binding Title}"/>
-            </Border>
-            <StackPanel VerticalAlignment="Bottom" Background="{StaticResource ListViewItemOverlayBackgroundThemeBrush}">
-                <TextBlock Text="{Binding Title}" Foreground="{StaticResource ListViewItemOverlayForegroundThemeBrush}" Style="{StaticResource TitleTextStyle}" Height="60" Margin="15,0,15,0"/>
-                <TextBlock Text="{Binding Subtitle}" Foreground="{StaticResource ListViewItemOverlaySecondaryForegroundThemeBrush}" Style="{StaticResource CaptionTextStyle}" TextWrapping="NoWrap" Margin="15,0,15,10"/>
-            </StackPanel>
-        </Grid>
-    </DataTemplate>
-    <DataTemplate x:Key="ZoomedOutItemTemplate">
-        <Grid HorizontalAlignment="Left" Width="250" Height="400">
             <Border Background="{StaticResource ListViewItemPlaceholderBackgroundThemeBrush}">
                 <Image Source="{Binding Image}" Stretch="UniformToFill" AutomationProperties.Name="{Binding Title}"/>
             </Border>

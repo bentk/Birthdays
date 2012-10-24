@@ -3,13 +3,7 @@ using System.Globalization;
 using System.Linq;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using Windows.ApplicationModel.Resources.Core;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.System.UserProfile;
-using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
 using System.Collections.Specialized;
@@ -32,13 +26,12 @@ namespace BirthdaysApp.Data
     {
         private static Uri _baseUri = new Uri("ms-appx:///");
 
-        public SampleDataCommon(String uniqueId, String title, String subtitle, String imagePath, String description)
+        public SampleDataCommon(String uniqueId, String title, String imagePath, int year, int mounth, int day)
         {
             this._uniqueId = uniqueId;
             this._title = title;
-            this._subtitle = subtitle;
-            this._description = description;
             this._imagePath = imagePath;
+            
         }
 
         private string _uniqueId = string.Empty;
@@ -62,11 +55,23 @@ namespace BirthdaysApp.Data
             set { this.SetProperty(ref this._subtitle, value); }
         }
 
-        private string _description = string.Empty;
-        public string Description
+        private int _year;
+        public int Year
         {
-            get { return this._description; }
-            set { this.SetProperty(ref this._description, value); }
+            get { return this._year; }
+            set { this.SetProperty(ref this._year, value); }
+        }
+        private int _month;
+        public int Month
+        {
+            get { return this._month; }
+            set { this.SetProperty(ref this._month, value); }
+        }
+        private int _day;
+        public int Day
+        {
+            get { return this._day; }
+            set { this.SetProperty(ref this._day, value); }
         }
 
         private ImageSource _image = null;
@@ -107,19 +112,19 @@ namespace BirthdaysApp.Data
     /// </summary>
     public class SampleDataItem : SampleDataCommon
     {
-        public SampleDataItem(String uniqueId, String title, String subtitle, String imagePath, String description, String content, SampleDataGroup group)
-            : base(uniqueId, title, subtitle, imagePath, description)
+        public SampleDataItem(String uniqueId, String title, String imagePath, int year, int month, int day, SampleDataGroup group)
+            : base(uniqueId, title, imagePath, year, month, day)
         {
-            this._content = content;
+            //this._content = content;
             this._group = group;
         }
 
-        private string _content = string.Empty;
-        public string Content
-        {
-            get { return this._content; }
-            set { this.SetProperty(ref this._content, value); }
-        }
+        //private string _content = string.Empty;
+        //public string Content
+        //{
+        //    get { return this._content; }
+        //    set { this.SetProperty(ref this._content, value); }
+        //}
 
         private SampleDataGroup _group;
         public SampleDataGroup Group
@@ -134,8 +139,8 @@ namespace BirthdaysApp.Data
     /// </summary>
     public class SampleDataGroup : SampleDataCommon
     {
-        public SampleDataGroup(String uniqueId, String title, String subtitle, String imagePath, String description)
-            : base(uniqueId, title, subtitle, imagePath, description)
+        public SampleDataGroup(String uniqueId, String title, String imagePath, int year, int month, int day)
+            : base(uniqueId, title, imagePath, year, month, day)
         {
             Items.CollectionChanged += ItemsCollectionChanged;
         }
@@ -233,10 +238,20 @@ namespace BirthdaysApp.Data
             get { return this._allGroups; }
         }
 
+        public static void AddItem(SampleDataItem sdi)
+        {
+            
+        }
         public static IEnumerable<SampleDataGroup> GetGroups(string uniqueId)
         {
             if (!uniqueId.Equals("AllGroups")) throw new ArgumentException("Only 'AllGroups' is supported as a collection of groups");
-            
+
+            return _sampleDataSource.AllGroups;
+        }
+        public static IEnumerable<SampleDataGroup> GetTopItems()
+        {
+  
+
             return _sampleDataSource.AllGroups;
         }
 
@@ -271,14 +286,13 @@ namespace BirthdaysApp.Data
             int monthNumber = 1;
             foreach (var monthName in dateTimeFormat.MonthNames)
             {
-                var group = new SampleDataGroup(monthName,
+                var group = new SampleDataGroup(monthNumber.ToString(),
                         monthName,
-                        "Group Subtitle: 1",
                         "Assets/" + monthNumber + ".jpg",
-                        "Group Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus tempor scelerisque lorem in vehicula. Aliquam tincidunt, lacus ut sagittis tristique, turpis massa volutpat augue, eu rutrum ligula ante a ante");
+                       2012, monthNumber, 1);
                 
                 //group.Items.Add(GetItemsForMonth(monthNumber));
-                group.Items.Add(AddPersonItem(group));
+                //group.Items.Add(AddPersonItem(group));
                 AllGroups.Add(group);
                 monthNumber++;
             }
@@ -286,15 +300,6 @@ namespace BirthdaysApp.Data
 
         }
 
-        private SampleDataItem AddPersonItem(SampleDataGroup g)
-        {
-            return new SampleDataItem("AddItem",
-                                      "AddItem",
-                                      "",
-                                      "Assets/PlusSign.png",
-                                      "Item Description: Desc",
-                                      "Content",
-                                      g);
-        }
+
     }
 }

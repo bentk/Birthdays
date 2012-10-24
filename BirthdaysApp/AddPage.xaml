@@ -30,13 +30,79 @@
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Button x:Name="backButton" Click="GoBack" IsEnabled="{Binding Frame.CanGoBack, ElementName=pageRoot}" Style="{StaticResource BackButtonStyle}"/>
+            <Button x:Name="backButton" Click="BackButtonClick1" IsEnabled="{Binding Frame.CanGoBack, ElementName=pageRoot}" Style="{StaticResource BackButtonStyle}" />
             <TextBlock x:Name="pageTitle" Grid.Column="1" Text="{StaticResource AppName}" Style="{StaticResource PageHeaderTextStyle}"/>
         </Grid>
-        <Image HorizontalAlignment="Left" Height="273" Tapped="ImageTapped" Margin="157,58,0,0" Grid.Row="1" VerticalAlignment="Top" Width="264"/>
-        <TextBox HorizontalAlignment="Left" Margin="614,115,0,0" Grid.Row="1" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="303"/>
-        <TextBlock HorizontalAlignment="Left" Margin="522,115,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Name" VerticalAlignment="Top" Height="32" Width="66"/>
+        
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0" Margin="20">
+                <Image HorizontalAlignment="Left" Height="273" x:Name="Photo" Source="Assets/SplashScreen.png" Tapped="ImageTapped" VerticalAlignment="Top" Width="264"/>
+                <Button Content="Click me to take your picture" Name="TakePictureButton" Click="TakePictureButton_Click"
+                VerticalAlignment="Top"></Button>
+                <Button Content="Select image" Name="SelectPictureButton" Click="SelectPictureButton_Click"></Button>
+            </StackPanel>
+            <StackPanel Grid.Column="1">
+                <StackPanel  Orientation="Horizontal" >
+                <TextBlock HorizontalAlignment="Left" Text="Name" x:Name="lblName" Width="150" Style="{StaticResource SnappedPageHeaderTextStyle}" VerticalAlignment="Top"/>
+                <TextBox HorizontalAlignment="Left" Text="" x:Name="txtName" Width="300"  VerticalAlignment="Top"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" >
+                <TextBlock HorizontalAlignment="Left" Text="Birthdate" x:Name="ldlDate" Width="150" 
+                           Style="{StaticResource SnappedPageHeaderTextStyle}" VerticalAlignment="Top"/>
+                    <!--StackPanel Orientation="Vertical"-->
+                        <ListBox Height="96" AllowDrop="True" HorizontalAlignment="Left" 
+                          Name="lbDay" VerticalAlignment="Top" Width="30">
+                    <ListBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Vertical" />
+                        </ItemsPanelTemplate>
+                    </ListBox.ItemsPanel>
+                    <ListBox.ItemContainerStyle>
+                        <Style TargetType="ListBoxItem">
+                            <Setter Property="Padding" Value="30 0 30 0 " />
+                        </Style>
+                    </ListBox.ItemContainerStyle>
+                </ListBox>
+                        <ListBox Height="96" AllowDrop="True" HorizontalAlignment="Left" 
+                          Name="lbMonths" VerticalAlignment="Top" Width="150">
+                            <ListBox.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel Orientation="Vertical" />
+                                </ItemsPanelTemplate>
+                            </ListBox.ItemsPanel>
+                            <ListBox.ItemContainerStyle>
+                                <Style TargetType="ListBoxItem">
+                                    <Setter Property="Padding" Value="30 0 30 0 " />
+                                </Style>
+                            </ListBox.ItemContainerStyle>
+                        </ListBox>
+                        <ListBox Height="96" AllowDrop="True" HorizontalAlignment="Left" 
+                          Name="lbYear" VerticalAlignment="Top" Width="50">
+                            <ListBox.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel Orientation="Vertical" />
+                                </ItemsPanelTemplate>
+                            </ListBox.ItemsPanel>
+                            <ListBox.ItemContainerStyle>
+                                <Style TargetType="ListBoxItem">
+                                    <Setter Property="Padding" Value="30 0 30 0 " />
+                                </Style>
+                            </ListBox.ItemContainerStyle>
+                        </ListBox>
+                    <!--/StackPanel-->
+                </StackPanel>
+            </StackPanel>
+               
 
+        </Grid>
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Right" Grid.Row="1">
+        <Button x:Name="btnCancel" Content="Cancel" Click="btnCancel_Click_1"/>
+        <Button x:Name="btnOk" Content="Ok" Click="btnOk_Click_1"/>
+        </StackPanel>
         <VisualStateManager.VisualStateGroups>
 
             <!-- Visual states reflect the application's view state -->
