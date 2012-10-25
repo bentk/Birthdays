@@ -82,12 +82,14 @@ namespace BirthdaysApp
             if (file != null)
             {
                 stream = await file.OpenAsync(FileAccessMode.Read);
+                _fileName = file.Path;
                 var bitmap = new BitmapImage();
                 bitmap.SetSource(stream);
                 Photo.Source = bitmap;
             }
         }
         IRandomAccessStream stream;
+        private string _fileName = string.Empty;
         private async void SelectPictureButton_Click(object sender, RoutedEventArgs e)
         {
             FileOpenPicker open = new FileOpenPicker();
@@ -105,6 +107,7 @@ namespace BirthdaysApp
             StorageFile file = await open.PickSingleFileAsync();
             if (file != null)
             {
+                _fileName= file.Path;
                 stream = await file.OpenAsync(Windows.Storage.FileAccessMode.Read);
                 var bitmap = new BitmapImage();
                 bitmap.SetSource(stream);
@@ -114,23 +117,7 @@ namespace BirthdaysApp
 
         private async void BackButtonClick1(object sender, RoutedEventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(txtName.Text))
-            {
-                new MessageDialog("No person is added because of missing [Name]").ShowAsync();
-                GoBack(sender,e);
-                return;
-            }
-
-            var messageDialog = new MessageDialog("Do you want to store " + txtName.Text + "?");
-            
-            messageDialog.Commands.Add(new UICommand("Yes", Yes));
-            messageDialog.Commands.Add(new UICommand("No", No));
-
-            messageDialog.DefaultCommandIndex = 0;
-
-            messageDialog.CancelCommandIndex = 1;
-
-            await messageDialog.ShowAsync();
+        
             GoBack(sender, e);
         }
 
@@ -161,9 +148,16 @@ namespace BirthdaysApp
                 return;
             }
 
-            //new SampleDataItem()
+            var group  =SampleDataSource.GetGroup((lbMonths.SelectedIndex + 1).ToString());
 
-            
+            var v = new SampleDataItem(
+                (txtName.Text + lbDay.SelectedItem + lbMonths.SelectedItem + lbYear.SelectedItem),
+                txtName.Text,
+                _fileName, (int)lbDay.SelectedItem, (int)lbMonths.SelectedIndex + 1, 
+                (int)lbYear.SelectedItem,group);
+
+            group.Items.Add(v);
+            GoBack(sender, e);
         }
     }
 }

@@ -296,10 +296,6 @@ namespace BirthdaysApp.Data
                 AllGroups.Add(group);
                 monthNumber++;
             }
-            
-
         }
-
-
     }
 }

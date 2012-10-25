@@ -54,45 +54,45 @@
                 <TextBlock HorizontalAlignment="Left" Text="Birthdate" x:Name="ldlDate" Width="150" 
                            Style="{StaticResource SnappedPageHeaderTextStyle}" VerticalAlignment="Top"/>
                     <!--StackPanel Orientation="Vertical"-->
-                        <ListBox Height="96" AllowDrop="True" HorizontalAlignment="Left" 
-                          Name="lbDay" VerticalAlignment="Top" Width="30">
-                    <ListBox.ItemsPanel>
+                        <ComboBox Margin="2" AllowDrop="True" HorizontalAlignment="Left" 
+                          Name="lbDay" VerticalAlignment="Top" Width="60">
+                    <ComboBox.ItemsPanel>
                         <ItemsPanelTemplate>
                             <StackPanel Orientation="Vertical" />
                         </ItemsPanelTemplate>
-                    </ListBox.ItemsPanel>
-                    <ListBox.ItemContainerStyle>
-                        <Style TargetType="ListBoxItem">
+                    </ComboBox.ItemsPanel>
+                    <!--ComboBox.ItemContainerStyle>
+                        <Style TargetType="ComboBoxItem">
                             <Setter Property="Padding" Value="30 0 30 0 " />
                         </Style>
-                    </ListBox.ItemContainerStyle>
-                </ListBox>
-                        <ListBox Height="96" AllowDrop="True" HorizontalAlignment="Left" 
+                    </ComboBox.ItemContainerStyle-->
+                </ComboBox>
+                        <ComboBox Margin="2" AllowDrop="True" HorizontalAlignment="Left" 
                           Name="lbMonths" VerticalAlignment="Top" Width="150">
-                            <ListBox.ItemsPanel>
+                            <ComboBox.ItemsPanel>
                                 <ItemsPanelTemplate>
                                     <StackPanel Orientation="Vertical" />
                                 </ItemsPanelTemplate>
-                            </ListBox.ItemsPanel>
-                            <ListBox.ItemContainerStyle>
-                                <Style TargetType="ListBoxItem">
+                            </ComboBox.ItemsPanel>
+                            <!--ComboBox.ItemContainerStyle>
+                                <Style TargetType="ComboBoxItem">
                                     <Setter Property="Padding" Value="30 0 30 0 " />
                                 </Style>
-                            </ListBox.ItemContainerStyle>
-                        </ListBox>
-                        <ListBox Height="96" AllowDrop="True" HorizontalAlignment="Left" 
-                          Name="lbYear" VerticalAlignment="Top" Width="50">
-                            <ListBox.ItemsPanel>
+                            </ComboBox.ItemContainerStyle-->
+                        </ComboBox>
+                        <ComboBox Margin="2" AllowDrop="True" HorizontalAlignment="Left" 
+                          Name="lbYear" VerticalAlignment="Top" Width="90">
+                            <ComboBox.ItemsPanel>
                                 <ItemsPanelTemplate>
                                     <StackPanel Orientation="Vertical" />
                                 </ItemsPanelTemplate>
-                            </ListBox.ItemsPanel>
-                            <ListBox.ItemContainerStyle>
-                                <Style TargetType="ListBoxItem">
+                            </ComboBox.ItemsPanel>
+                            <!--ComboBox.ItemContainerStyle>
+                                <Style TargetType="ComboBoxItem">
                                     <Setter Property="Padding" Value="30 0 30 0 " />
                                 </Style>
-                            </ListBox.ItemContainerStyle>
-                        </ListBox>
+                            </ComboBox.ItemContainerStyle-->
+                        </ComboBox>
                     <!--/StackPanel-->
                 </StackPanel>
             </StackPanel>
